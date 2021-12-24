@@ -22,19 +22,15 @@ class UserController {
         this.repository = repository;
     }
 
-    // Aggregate root
-    // tag::get-aggregate-root[]
     @GetMapping("/user")
     List<User> all() {
         return repository.findAll();
     }
-    // end::get-aggregate-root[]
 
     @PostMapping("/user")
     User newEmployee(@RequestBody User newUser) {
         return repository.save(newUser);
     }
-
 
     @GetMapping("/user/{id}")
     User one(@PathVariable Long id) {
