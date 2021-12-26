@@ -6,4 +6,8 @@ import lombok.Data;
 public class MessageResponse {
 
     private String massage;
+
+    public MessageResponse(String massage) {
+        this.massage = massage;
+    }
 }

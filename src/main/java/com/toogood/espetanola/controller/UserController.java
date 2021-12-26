@@ -2,9 +2,9 @@ package com.toogood.espetanola.controller;
 
 import java.util.List;
 
-import com.toogood.espetanola.dto.User;
+import com.toogood.espetanola.dto.UserF;
 import com.toogood.espetanola.exception.UserNotFoundException;
-import com.toogood.espetanola.repository.UserRepository;
+import com.toogood.espetanola.repository.UserFRepository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,42 +16,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class UserController {
 
-    private final UserRepository repository;
+    private final UserFRepository repository;
 
-    UserController(UserRepository repository) {
+    UserController(UserFRepository repository) {
         this.repository = repository;
     }
 
     @GetMapping("/user")
-    List<User> all() {
+    List<UserF> all() {
         return repository.findAll();
     }
 
     @PostMapping("/user")
-    User newEmployee(@RequestBody User newUser) {
-        return repository.save(newUser);
+    UserF newEmployee(@RequestBody UserF newUserF) {
+        return repository.save(newUserF);
     }
 
     @GetMapping("/user/{id}")
-    User one(@PathVariable Long id) {
+    UserF one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @PutMapping("/user/{id}")
-    User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
+    UserF replaceUser(@RequestBody UserF newUserF, @PathVariable Long id) {
 
         return repository.findById(id)
-                .map(user -> {
-                    user.setEmail(newUser.getEmail());
-                    user.setPassword_hash(newUser.getPassword_hash());
-                    user.setName(newUser.getName());
-                    return repository.save(user);
+                .map(userF -> {
+                    userF.setEmail(newUserF.getEmail());
+                    userF.setPassword_hash(newUserF.getPassword_hash());
+                    userF.setName(newUserF.getName());
+                    return repository.save(userF);
                 })
                 .orElseGet(() -> {
-                    newUser.setId(id);
-                    return repository.save(newUser);
+                    newUserF.setId(id);
+                    return repository.save(newUserF);
                 });
     }
 

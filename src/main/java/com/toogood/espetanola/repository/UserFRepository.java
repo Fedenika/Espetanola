@@ -1,9 +1,9 @@
 package com.toogood.espetanola.repository;
 
-import com.toogood.espetanola.dto.User;
+import com.toogood.espetanola.dto.UserF;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserFRepository extends JpaRepository<UserF, Long> {
 
 }
 
